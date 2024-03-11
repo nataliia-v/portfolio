@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import Programmer from '../models/Programmer';
 import Sky from '../models/Sky';
+import Platform from '../models/Platform';
 
 const Home = () => {
   const [currentStage, setCurrentStage] = useState(1);
@@ -11,8 +12,7 @@ const Home = () => {
 
   const adjustProgrammerSceneForScreenSize = () => {
     let screenScale = null;
-    let screenPosition = [-0, 1, -7];
-    let rotation = [0.66, 7.5, 0];
+    let screenPosition = [0, 1, -7];
 
     if (window.innerWidth < 768) {
       screenScale = [0.9, 0.9, 0.9];
@@ -20,11 +20,26 @@ const Home = () => {
       screenScale = [1, 1, 1];
     }
 
-    return [screenScale, screenPosition, rotation];
+    return [screenScale, screenPosition];
   };
 
-  const [programmerSceneScale, programmerScenePosition, programmerSceneRotaion] =
-    adjustProgrammerSceneForScreenSize();
+  const adjustPlatformForScreenSize = () => {
+    let screenScale;
+    let screenPosition = [0, 0, -7];
+
+    // If screen width is less than 768px, adjust the scale and position
+    if (window.innerWidth < 768) {
+      screenScale = [300, 20, 500];
+    } else {
+      screenScale = [300, 20, 500];
+    }
+
+    return [screenScale, screenPosition];
+  };
+
+  const [programmerSceneScale, programmerScenePosition] = adjustProgrammerSceneForScreenSize();
+
+  const [platformScale, platformPosition] = adjustPlatformForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -45,10 +60,16 @@ const Home = () => {
           <Programmer
             position={programmerScenePosition}
             scale={programmerSceneScale}
-            rotation={programmerSceneRotaion}
+            rotation={[0.66, 7.5, 0]}
             isRotating={isRotating}
             setIsRotating={setIsRotating}
             setCurrentStage={setCurrentStage}
+          />
+          <Platform
+            position={platformPosition}
+            scale={platformScale}
+            rotation={[0.66, 7.5, 0]}
+            isRotating={isRotating}
           />
         </Suspense>
       </Canvas>
