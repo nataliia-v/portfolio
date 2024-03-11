@@ -51,35 +51,33 @@ const Programmer = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
     if (isRotating) {
       // If rotation is enabled, calculate the change in clientX position
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-  
+
       // calculate the change in the horizontal position of the mouse cursor or touch input
       const delta = (clientX - lastX.current) / viewport.width;
-  
+
       progremmerRef.current.rotation.y += delta * 0.01 * Math.PI; //  Math.PI because working in a circle
       lastX.current = clientX;
       rotationSpeed.current = delta * 0.01 * Math.PI;
     }
-    
   };
 
-  const handleKeyDown = (e) => {
-    if(e.key === 'ArrowLeft') {
-      if(!isRotating) setIsRotating(true);
+  const handleKeyDown = e => {
+    if (e.key === 'ArrowLeft') {
+      if (!isRotating) setIsRotating(true);
       progremmerRef.current.rotation.y += 0.01 * Math.PI; // Math.PI it is a circle
-    } else if(e.key === 'ArrowRight') {
-      if(!isRotating) setIsRotating(true);
+    } else if (e.key === 'ArrowRight') {
+      if (!isRotating) setIsRotating(true);
       progremmerRef.current.rotation.y -= 0.01 * Math.PI; // Math.PI it is a circle
     }
-  }
+  };
 
+  const handleKeyUp = e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      setIsRotating(false);
+    }
+  };
 
-const handleKeyUp = (e) => { 
-  if(e.key === 'ArrowLeft' || e.key === 'ArrowRight' ) {
-    setIsRotating(false)
-  }
-}
-
-useFrame(()=> {
+  useFrame(() => {
     // If not rotating, apply damping to slow down the rotation (smoothly)
     if (!isRotating) {
       // Apply damping factor
@@ -91,10 +89,10 @@ useFrame(()=> {
       }
 
       progremmerRef.current.rotation.y += rotationSpeed.current;
-  } else {
-    const rotation = progremmerRef.current.rotation.y;
+    } else {
+      const rotation = progremmerRef.current.rotation.y;
 
-          /**
+      /**
        * Normalize the rotation value to ensure it stays within the range [0, 2 * Math.PI].
        * The goal is to ensure that the rotation value remains within a specific range to
        * prevent potential issues with very large or negative rotation values.
@@ -110,52 +108,44 @@ useFrame(()=> {
        *     always stays within the range of 0 to 2 * Math.PI, which is equivalent to a full
        *     circle in radians.
        */
-          const normalizedRotation =
-          ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-  
-        // Set the current stage based on the scene orientation
-        switch (true) {
-          case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
-            setCurrentStage(4);
-            break;
-          case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
-            setCurrentStage(3);
-            break;
-          case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
-            setCurrentStage(2);
-            break;
-          case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
-            setCurrentStage(1);
-            break;
-          default:
-            setCurrentStage(null);
-        }
+      const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-  }
-  
-}); // function is going to happen on every single frame
+      // Set the current stage based on the scene orientation
+      switch (true) {
+        case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
+          setCurrentStage(4);
+          break;
+        case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
+          setCurrentStage(3);
+          break;
+        case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
+          setCurrentStage(2);
+          break;
+        case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
+          setCurrentStage(1);
+          break;
+        default:
+          setCurrentStage(null);
+      }
+    }
+  }); // function is going to happen on every single frame
 
-  useEffect(()=>{
+  useEffect(() => {
     const canvas = gl.domElement; // we're touching the canvas
     canvas.addEventListener('pointerdown', handlePointerDown);
-    canvas.addEventListener('pointerup', handlePointerUp)
-    canvas.addEventListener('pointermove', handlePointerMove)
+    canvas.addEventListener('pointerup', handlePointerUp);
+    canvas.addEventListener('pointermove', handlePointerMove);
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
-      canvas.removeEventListener('pointerup', handlePointerUp)
-      canvas.removeEventListener('pointermove', handlePointerMove)
-    document.removeEventListener('keydown', handleKeyDown);
-    document.removeEventListener('keyup', handleKeyUp);
-
-
-    }
-
-  },[gl, handlePointerDown, handlePointerUp, handlePointerMove])
-
-  
+      canvas.removeEventListener('pointerup', handlePointerUp);
+      canvas.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
 
   return (
     <a.group ref={progremmerRef} {...props} dispose={null}>
