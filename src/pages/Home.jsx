@@ -15,21 +15,21 @@ const Home = () => {
     let screenPosition = [0, 1, -7];
 
     if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0.9];
+      screenScale = [0.5, 0.5, 0.5];
     } else {
-      screenScale = [1, 1, 1];
+      screenScale = [0.8, 0.8, 0.8];
     }
 
     return [screenScale, screenPosition];
   };
-
+  
   const adjustPlatformForScreenSize = () => {
     let screenScale;
     let screenPosition = [0, 0, -7];
 
     // If screen width is less than 768px, adjust the scale and position
     if (window.innerWidth < 768) {
-      screenScale = [300, 20, 500];
+      screenScale = [240, 20, 300];
     } else {
       screenScale = [300, 20, 500];
     }
