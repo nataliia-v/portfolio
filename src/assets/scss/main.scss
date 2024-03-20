@@ -1,0 +1,59 @@
+// Generate palette https://www.tints.dev/
+// Color names http://chir.ag/projects/name-that-color/ 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blue-rgb: 237 245 255;
+  --green-rgb: 125 161 35;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+}
+
+@layer utilities {
+  .head-text {
+    @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+  }
+
+  .subhead-text {
+    @apply font-semibold sm:text-3xl text-xl relative font-poppins;
+  }
+
+  .header {
+    @apply flex justify-between items-center sm:px-16 px-8 py-4 max-w-7xl mx-auto absolute top-0 bg-transparent z-10 right-0 left-0;
+  }
+
+  .info-box {
+    @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl bubblegum-pink pt-4 pb-12 px-8;
+  }
+  .box-btn {
+    @apply py-3 px-6 rounded-lg text-pastel-pink-dark text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+  }
+}
+
+.pink-gradient_text {
+  @apply bg-gradient-to-r from-pastel-pink to-light-blue bg-clip-text text-transparent;
+}
+
+.bubblegum-pink {
+  @apply bg-gradient-to-r from-pastel-pink to-light-blue;
+  // background:#3c0c39;
+  position: relative;
+  border-radius: 10px;
+  border: theme('colors.pastel-pink.DEFAULT');
+  box-shadow: 0.6vmin 0.6vmin theme('colors.pastel-pink.dark'), 1vmin 1vmin theme('colors.pastel-pink.light'), 1vmin 1vmin ptheme('colors.pastel-pink.light'),
+    0.65vmin 1vmin theme('colors.pastel-pink.light'), 1vmin 0.65vmin theme('colors.pastel-pink.light');
+}
+
+.box-white {
+  background: theme('colors.white');
+  border: #fff;
+  box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
+    0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+}

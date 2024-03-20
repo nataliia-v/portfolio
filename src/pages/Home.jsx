@@ -2,6 +2,8 @@ import { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import Loader from '../components/Loader';
+import HomeInfo from '../components/HomeInfo';
+
 import Programmer from '../models/Programmer';
 import Sky from '../models/Sky';
 import Platform from '../models/Platform';
@@ -22,7 +24,7 @@ const Home = () => {
 
     return [screenScale, screenPosition];
   };
-  
+
   const adjustPlatformForScreenSize = () => {
     let screenScale;
     let screenPosition = [0, 0, -7];
@@ -43,9 +45,9 @@ const Home = () => {
 
   return (
     <section className="w-full h-screen relative">
-      {/* <div className='absolute top-20 left-0 right-0 z-10 flex items-center justify-center'>
-        POpup
-      </div> */}
+      <div className="absolute top-20 left-0 right-0 z-10 flex items-center justify-center">
+        {currentStage && <HomeInfo currentStage={currentStage} />}
+      </div>
 
       <Canvas
         className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
