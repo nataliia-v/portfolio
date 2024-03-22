@@ -17,9 +17,14 @@ body {
 }
 
 @layer utilities {
+  .max-container {
+    @apply max-w-5xl mx-auto sm:p-16 pb-12 pt-[126px] px-8 min-h-[calc(100vh-80px)];
+  }
+
   .head-text {
     @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
   }
+
 
   .subhead-text {
     @apply font-semibold sm:text-3xl text-xl relative font-poppins;
@@ -32,8 +37,21 @@ body {
   .info-box {
     @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl bubblegum-pink pt-4 pb-12 px-8;
   }
+
   .box-btn {
     @apply py-3 px-6 rounded-lg text-pink-pastel-dark text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+  }
+
+  .input {
+    @apply bg-white border border-gray-200 text-black text-sm rounded-lg focus:ring-pink-pastel-dark focus:border-pink-pastel-dark block w-full p-2.5 mt-2.5 font-normal shadow-card;
+  }
+
+  .textarea {
+    @apply block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-pink-pastel-dark focus:border-pink-pastel-dark mt-2.5 font-normal shadow-card;
+  }
+
+  .btn {
+    @apply text-white bg-gradient-to-r  from-pink-pastel to-blue-nepal focus:ring-4 focus:outline-none focus:ring-pink-pastel-dark font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
   }
 }
 

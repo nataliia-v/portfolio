@@ -14,7 +14,10 @@ export default {
         dark: '#FF7092'
       },
       'blue-nepal': '#91bbc5',
-      'blue-pattens': '#D2E4FF'
+      'blue-pattens': '#D2E4FF',
+      gray: {
+        200: '#D5DAE1'
+      }
     },
     boxShadow: {
       card: '0px 1px 2px 0px rgba(0, 0, 0, 0.05)'
