@@ -14,10 +14,10 @@ const Home = () => {
 
   const adjustProgrammerSceneForScreenSize = () => {
     let screenScale = null;
-    let screenPosition = [0, 1, -7];
+    let screenPosition = [0, -2, -7];
 
     if (window.innerWidth < 768) {
-      screenScale = [0.5, 0.5, 0.5];
+      screenScale = [0.8, 0.8, 0.8];
     } else {
       screenScale = [0.8, 0.8, 0.8];
     }
@@ -27,13 +27,13 @@ const Home = () => {
 
   const adjustPlatformForScreenSize = () => {
     let screenScale;
-    let screenPosition = [0, 0, -7];
+    let screenPosition = [0, -3, -7];
 
     // If screen width is less than 768px, adjust the scale and position
     if (window.innerWidth < 768) {
-      screenScale = [240, 20, 300];
+      screenScale = [240, 40, 300];
     } else {
-      screenScale = [300, 20, 500];
+      screenScale = [300, 40, 500];
     }
 
     return [screenScale, screenPosition];
