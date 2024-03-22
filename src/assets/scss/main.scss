@@ -33,27 +33,27 @@ body {
     @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl bubblegum-pink pt-4 pb-12 px-8;
   }
   .box-btn {
-    @apply py-3 px-6 rounded-lg text-pastel-pink-dark text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+    @apply py-3 px-6 rounded-lg text-pink-pastel-dark text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
   }
 }
 
 .pink-gradient_text {
-  @apply bg-gradient-to-r from-pastel-pink to-light-blue bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-pink-pastel to-blue-nepal bg-clip-text text-transparent;
 }
 
 .bubblegum-pink {
-  @apply bg-gradient-to-r from-pastel-pink to-light-blue;
+  @apply bg-gradient-to-r from-pink-pastel to-blue-nepal;
   // background:#3c0c39;
   position: relative;
   border-radius: 10px;
-  border: theme('colors.pastel-pink.DEFAULT');
-  box-shadow: 0.6vmin 0.6vmin theme('colors.pastel-pink.dark'), 1vmin 1vmin theme('colors.pastel-pink.light'), 1vmin 1vmin ptheme('colors.pastel-pink.light'),
-    0.65vmin 1vmin theme('colors.pastel-pink.light'), 1vmin 0.65vmin theme('colors.pastel-pink.light');
+  border: theme('colors.pink-pastel.DEFAULT');
+  box-shadow: 0.6vmin 0.6vmin theme('colors.pink-pastel.dark'), 1vmin 1vmin theme('colors.pink-pastel.light'), 1vmin 1vmin ptheme('colors.pink-pastel.light'),
+    0.65vmin 1vmin theme('colors.pink-pastel.light'), 1vmin 0.65vmin theme('colors.pink-pastel.light');
 }
 
 .box-white {
   background: theme('colors.white');
-  border: #fff;
-  box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
-    0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+  border: theme('colors.white');
+  box-shadow: 0.6vmin 0.6vmin theme('colors.white'), 1vmin 1vmin theme('colors.blue-nepal'), 1vmin 1vmin theme('colors.blue-pattens'),
+    0.65vmin 1vmin theme('colors.blue-pattens'), 1vmin 0.65vmin theme('colors.blue-pattens');
 }

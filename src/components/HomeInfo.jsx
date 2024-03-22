@@ -8,7 +8,7 @@ const InfoBox = ({ text, link, btnText }) => (
     <p className="font-medium sm:text-xl text-center">{text}</p>
     <Link to={link} className="box-white box-btn">
       {btnText}
-      <img src={arrow} />
+      <img src={arrow} className="w-4 h-4 object-contain" />
     </Link>
   </div>
 );
@@ -27,8 +27,20 @@ const renderContent = {
       btnText="Learn more"
     />
   ),
-  3: <h1>3</h1>,
-  4: <h1>4</h1>
+  3: (
+    <InfoBox
+      text="Would you like to see projects matching my skills?"
+      link="/portfolio/projects"
+      btnText="Visit portfolio"
+    />
+  ),
+  4: (
+    <InfoBox
+      text="Got a project in mind or on the hunt for a developer? I'm right here, just a few keystrokes away!"
+      link="/portfolio/contact"
+      btnText="Let's talk"
+    />
+  )
 };
 
 const HomeInfo = ({ currentStage }) => {
