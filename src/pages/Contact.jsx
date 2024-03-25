@@ -13,6 +13,8 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading( true );
 
+    console.log('pk', import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY)
+
     emailjs.send(
       import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
       import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
@@ -23,8 +25,10 @@ const Contact = () => {
         to_email: 'nataly.verbenskaya@gmail.com',
         message: form.message
       },
-      import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-      ).then(()=> {
+      {
+        publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+      }
+    ).then(()=> {
         setIsLoading(false)
           // TODO: show success message
           // TODO: hide an alert
