@@ -3,9 +3,11 @@ import { Canvas } from '@react-three/fiber';
 import emailjs from '@emailjs/browser';
 
 import Loader from '../components/Loader';
+import Alert from '../components/Alert';
+
 import { Bunny } from '../models/Bunny';
 
-import useAlert from '../hooks/useAlert.js';
+import useAlert from '../hooks/useAlert';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -55,7 +57,7 @@ const Contact = () => {
             email: '',
             message: ''
           });
-        });
+        }, [3000]);
       })
       .catch(error => {
         setIsLoading(false);
@@ -74,6 +76,7 @@ const Contact = () => {
 
   return (
     <section className="relative flex lg:flex-row flex-col max-container">
+      {alert.show && <Alert {...alert} />}
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1>Get in Touch</h1>
 

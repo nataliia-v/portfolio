@@ -5,3 +5,5 @@ EmailJS helps to send emails using client-side technologies only. No server is r
 https://www.emailjs.com/docs/introduction/how-does-emailjs-work/
 
 add GLTF model file to https://gltf.pmnd.rs/
+
+create colors palette https://uicolors.app/create
