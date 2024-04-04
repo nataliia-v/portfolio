@@ -1,58 +1,83 @@
-import { React, useState } from 'react';
+import { React, Suspense, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 import emailjs from '@emailjs/browser';
+
+import Loader from '../components/Loader';
+import { Bunny } from '../models/Bunny';
+
+import useAlert from '../hooks/useAlert.js';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const [currentAnimation, setCurrentAnimation] = useState('Walk');
 
-  const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value})
+  const { alert, showAlert, hideAlert } = useAlert();
+
+  const handleChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    setIsLoading( true );
+    setIsLoading(true);
 
-    emailjs.send(
-      import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-      {
-        from_name: form.name,
-        to_name: "Nataliia",
-        from_email: form.email,
-        to_email: 'nataly.verbenskaya@gmail.com',
-        message: form.message
-      },
-      {
-        publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-      }
-    ).then(()=> {
-        setIsLoading(false)
-          // TODO: show success message
-          // TODO: hide an alert
+    setCurrentAnimation('Jump');
+
+    emailjs
+      .send(
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          to_name: 'Nataliia',
+          from_email: form.email,
+          to_email: 'nataly.verbenskaya@gmail.com',
+          message: form.message
+        },
+        {
+          publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        }
+      )
+      .then(() => {
+        setIsLoading(false);
+        showAlert({
+          show: true,
+          text: 'Message sent succesfully',
+          type: 'success'
+        });
+
+        setTimeout(() => {
+          hideAlert();
+          setCurrentAnimation('Walk');
           setForm({
-            name: "",
+            name: '',
             email: '',
-            message: ""
-          })
-      }).catch((error) => {
-        setIsLoading(false)
-        console.log(error)
-        // TODO: show error message
+            message: ''
+          });
+        });
       })
+      .catch(error => {
+        setIsLoading(false);
+        setCurrentAnimation('Walk');
+        console.log(error);
+        showAlert({
+          show: true,
+          text: "Error, I didn't recieve your message",
+          type: 'danger'
+        });
+      });
   };
 
-  const handleFocus = () => {};
-  const handleBlur = () => {};
-  
+  const handleFocus = () => setCurrentAnimation('Investigate');
+  const handleBlur = () => setCurrentAnimation('Walk');
+
   return (
     <section className="relative flex lg:flex-row flex-col max-container">
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1>Get in Touch</h1>
-        <form
-        className="w-full flex flex-col gap-7 mt-14"
-        onSubmit={handleSubmit}
-        >
+
+        <form className="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
           <label className="text-black-500 font-semibold">
             Name
             <input
@@ -97,15 +122,38 @@ const Contact = () => {
             />
           </label>
           <button
-          className='btn'
-          type='submit'
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          disabled={isLoading}
+            className="btn"
+            type="submit"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            disabled={isLoading}
           >
             {isLoading ? 'Sending...' : 'Send message'}
           </button>
         </form>
+      </div>
+
+      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
+        <Canvas
+          camera={{
+            position: [0, 0, 5],
+            fov: 75,
+            near: 0.1,
+            far: 1000
+          }}
+        >
+          <directionalLight intensity={5} position={[-1, -1, 1.5]} />
+          <ambientLight intensity={1} />
+          <Suspense fallback={<Loader />}>
+            <Bunny
+              currentAnimation={currentAnimation}
+              position={[0, -1, 2.7]}
+              // rotation={[0,-0.2,0.1]}
+              rotation={[0, 1, 0]}
+              scale={[0.8, 0.8, 0.8]}
+            />
+          </Suspense>
+        </Canvas>
       </div>
     </section>
   );

@@ -170,6 +170,4 @@ const Programmer = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
   );
 };
 
-useGLTF.preload('/programmer_cr4y.glb');
-
 export default Programmer;
