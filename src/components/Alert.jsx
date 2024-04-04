@@ -2,10 +2,10 @@ import React from 'react';
 
 const Alert = ({ type, text }) => {
   return (
-    <div className="absolute top-12 right-0 left-0 flex justify-center items-center">
+    <div role="alert" className="absolute z-10 top-15 right-0 left-0 flex justify-center items-center">
       <div
         className={`${type === 'danger' ? 'bg-red-800' : 'bg-blue-800'}
-      p-2 text-white leading-none lg:rounded-full flex lg:inline-flex items-center`}
+      p-2 text-white leading-none rounded-lg lg:rounded-full flex lg:inline-flex items-center `}
         role="alert"
       >
         <p
