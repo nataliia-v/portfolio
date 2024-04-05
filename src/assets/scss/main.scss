@@ -43,11 +43,11 @@ body {
   }
 
   .input {
-    @apply bg-white border border-gray-200 text-black text-sm rounded-lg focus:ring-pink-pastel-dark focus:border-pink-pastel-dark block w-full p-2.5 mt-2.5 font-normal shadow-card;
+    @apply bg-white border border-gray-200 text-black text-sm rounded-lg block w-full p-2.5 mt-2.5 font-normal shadow-card;
   }
 
   .textarea {
-    @apply block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-pink-pastel-dark focus:border-pink-pastel-dark mt-2.5 font-normal shadow-card;
+    @apply block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 mt-2.5 font-normal shadow-card;
   }
 
   .btn {
